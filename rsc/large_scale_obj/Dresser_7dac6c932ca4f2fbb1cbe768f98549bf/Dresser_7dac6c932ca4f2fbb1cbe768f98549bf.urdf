@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<robot name="Dresser_7dac6c932ca4f2fbb1cbe768f98549bf">
+   <material name="obj_color">
+      <color rgba="1.0 0.423529411765 0.0392156862745 1.0"/>
+   </material>
+   <link name="top">
+      <inertial>
+         <origin rpy="0.0001229780019567539 0.0009829971271384009 0.00106774584062158" xyz="-0.001026061030280408 0.000523515390435893 0.007325915975849286"/>
+         <mass value="0.3171490297462001"/>
+         <inertia ixx="0.000982997488978546" ixy="1.751322040586552e-07" ixz="-9.237611600150616e-09" iyy="0.001067745014146588" iyz="-6.62480497795812e-07" izz="0.0001229784665916012"/>
+      </inertial>
+      <visual>
+         <origin rpy="0 0 0" xyz="0 0 0"/>
+         <geometry>
+            <mesh filename="top_watertight_tiny.stl" scale="1 1 1"/>
+         </geometry>
+         <material name="obj_color"/>
+      </visual>
+      <collision>
+         <origin rpy="0 0 0" xyz="0 0 0"/>
+         <geometry>
+            <mesh filename="top_watertight_tiny.obj" scale="1 1 1"/>
+         </geometry>
+      </collision>
+   </link>
+   <link name="bottom">
+      <inertial>
+         <origin rpy="1.633333333199431e-08 1.633333333199431e-08 1.633333333362855e-08" xyz="0.3464080000000008 0.3464080000000008 0.3464080000000008"/>
+         <mass value="0.0009800000000000017"/>
+         <inertia ixx="1.633333333253906e-08" ixy="5.447480642029219e-19" ixz="5.447480642029219e-19" iyy="1.633333333253906e-08" iyz="5.447480642029219e-19" izz="1.633333333253906e-08"/>
+      </inertial>
+      <visual>
+         <origin rpy="0 0 0" xyz="0 0 0"/>
+         <geometry>
+            <mesh filename="bottom_watertight_tiny.stl" scale="1 1 1"/>
+         </geometry>
+         <material name="obj_color"/>
+      </visual>
+   </link>
+   <joint name="rotation" type="revolute">
+      <origin xyz="0 0 0"/>
+      <axis xyz="0 0 -1"/>
+      <parent link="bottom"/>
+      <child link="top"/>
+      <dynamics damping="1.0" friction="1.0"/>
+      <limit effort="0.1" velocity="0.1" lower="0" upper="0.001"/>
+   </joint>
+</robot>

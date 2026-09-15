@@ -1,5 +1,6 @@
 from manotorch.axislayer import AxisLayerFK
 from manotorch.manolayer import ManoLayer, MANOOutput
+import os
 import numpy as np
 import torch
 from raisimGymTorch.helper import rotations
@@ -7,10 +8,11 @@ from raisimGymTorch.helper import rotations
 
 class PoseTrans():
     def __init__(self):
-        self.axisFK = AxisLayerFK(mano_assets_root="~/manotorch/assets/mano").to('cuda')
+        mano_assets_root = os.path.expanduser(os.environ.get("MANO_ASSETS_ROOT", "~/manotorch/assets/mano"))
+        self.axisFK = AxisLayerFK(mano_assets_root=mano_assets_root).to('cuda')
         self.mano_layer = ManoLayer(rot_mode="axisang",
                                center_idx=9,
-                               mano_assets_root="~/manotorch/assets/mano",
+                               mano_assets_root=mano_assets_root,
                                use_pca=False,
                                flat_hand_mean=True).to('cuda')
         self.action_clip_min = np.zeros((1, 20))
